@@ -26,4 +26,4 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: bwerquin/benchmark9001Z:latest
+          tags: bwerquin/benchmark9001z:latest
