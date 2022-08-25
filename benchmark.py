@@ -5,7 +5,7 @@ from script.preprocess_data import init_dataset, get_unique_occupation_text_inpu
 from script.stromae import process_data_stromae
 
 
-def eval_old(input_dataframe: pd.DataFrame(), suggestions: dict[str, list[str]]) -> int:
+def eval_old(input_dataframe: pd.DataFrame, suggestions: dict[str, list[str]]) -> int:
     data = input_dataframe[["PCLCA","PCLCALIBELLEMAX","SEXE","PCLCANBECHO"]]
     data = data.loc[(~data["PCLCA"].isna()) & (data["PCLCA"]!="") & (data["PCLCA"]!="999") & (data["SEXE"]=="1"),]
     data = data.head(100)
@@ -19,7 +19,7 @@ def eval_old(input_dataframe: pd.DataFrame(), suggestions: dict[str, list[str]])
 
 if __name__ == '__main__':
     url_dataset = os.environ["URL_DATASET"] # "https://minio.lab.sspcloud.fr/shz42c/hackathon9001Z/EEC_hackathon.csv"
-    url_stromae = os.environ["URL_STROMAE"] # "https://stromae-90-01z.dev.insee.io/questionnaire/90-01z/unite-enquetee/11"
+    url_stromae = os.environ["URL_STROMAE"] # "https://stromae-9001z.kub.sspcloud.fr/questionnaire/90-01Z/unite-enquetee/90-01Z_01"
     data = init_dataset(url_dataset)
     men_occupations, women_occuations = get_unique_occupation_text_input_by_sex(data)
     print(len(men_occupations))

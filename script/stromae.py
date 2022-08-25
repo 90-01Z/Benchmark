@@ -61,6 +61,7 @@ def initialization_driver(url_stromae: str, is_global: bool = True) -> Firefox:
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "#next-button > .MuiButton-label"))
     )
+    driver.find_element(By.CSS_SELECTOR, "#input-label-l5smdkey-2 > p").click()
     driver.find_element(By.CSS_SELECTOR, "#next-button > .MuiButton-label").click()
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.ID, "l5smshnt-input"))

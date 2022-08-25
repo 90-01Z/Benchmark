@@ -11,7 +11,7 @@ Test 2 : suggester lunatic après modification
 
 ## Suggester-Lunatic on Stromae
 
-https://stromae-90-01z.dev.insee.io/questionnaire/90-01z/unite-enquetee/11
+https://stromae-90-01z.kub.sspcloud.fr/questionnaire/90-01z/unite-enquetee/11
 
 Scénario : 
 - accès au questionnaire de l'UE 11
