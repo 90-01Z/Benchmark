@@ -8,6 +8,5 @@ RUN apt-get update && \
     tar -xvf /tmp/geckodriver.tar.gz -C /tmp && \
     mv /tmp/geckodriver /usr/local/bin/geckodriver && \
     chmod +x /usr/local/bin/geckodriver && \
-    pip install -r /Benchmark/requirements.txt && \
-    Xvfb :99 -ac &
-CMD python /Benchmark/benchmark.py
+    pip install -r /Benchmark/requirements.txt
+CMD /bin/bash -c 'Xvfb :99 -ac & ; python /Benchmark/benchmark.py ;'
