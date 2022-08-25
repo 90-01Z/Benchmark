@@ -9,6 +9,5 @@ RUN apt-get update && \
     mv /tmp/geckodriver /usr/local/bin/geckodriver && \
     chmod +x /usr/local/bin/geckodriver && \
     pip install -r /Benchmark/requirements.txt && \
-    Xvfb :99 -ac && \
-    export DISPLAY=:99
+    Xvfb :99 -ac &
 CMD python /Benchmark/benchmark.py
