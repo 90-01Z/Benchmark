@@ -1,6 +1,6 @@
 FROM python
 ENV DISPLAY=:99
-COPY . .
+COPY . /Benchmark
 RUN apt-get update && \
     apt-get install -y curl unzip xvfb libxi6 libgconf-2-4 firefox-esr && \
     mkdir -p tmp && \
