@@ -33,5 +33,5 @@ with open("./index_gen/stromae/PROF2022F.json",mode="w",encoding="utf-8") as f:
     json.dump(stromae_f_dict,f, ensure_ascii=False)
 
 # OUTPUT MELAUTO
-stromae_h.to_csv("./index_gen/melauto/profession_h.csv",index=False, encoding="utf-8", header=False, sep=";")
-stromae_f.to_csv("./index_gen/melauto/profession_f.csv",index=False, encoding="utf-8", header=False, sep=";")
+stromae_h.to_csv("./index_gen/melauto/profession.csv",index=False, encoding="utf-8", header=False, sep=";")
+stromae_f.to_csv("./index_gen/melauto/professionf.csv",index=False, encoding="utf-8", header=False, sep=";")
