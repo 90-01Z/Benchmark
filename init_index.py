@@ -1,8 +1,10 @@
 import json
 import pandas as pd
 import os
+import urllib.request 
 
 path_index_input = os.environ["INDEX_NUMERIC_COMPACT"] # "C:\Users\SHZ42C\Documents\RTI\Refonte de la PCS\data\index_alphabetique_numerique_compact_2022.csv"
+
 data = pd.read_csv(path_index_input,dtype=str, encoding="utf-8")
 data = data.loc[data["liste"]== "1",]
 
@@ -35,3 +37,6 @@ with open("./index_gen/stromae/PROF2022F.json",mode="w",encoding="utf-8") as f:
 # OUTPUT MELAUTO
 stromae_h.to_csv("./index_gen/melauto/profession.csv",index=False, encoding="utf-8", header=False, sep=";")
 stromae_f.to_csv("./index_gen/melauto/professionf.csv",index=False, encoding="utf-8", header=False, sep=";")
+
+urllib.request.urlretrieve(os.environ["STOPWORD_FILE"] , "./index_gen/melauto/exclusions-profession.csv")
+urllib.request.urlretrieve(os.environ["STOPWORD_FILE"] , "./index_gen/melauto/exclusions-professionf.csv")
