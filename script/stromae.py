@@ -27,7 +27,7 @@ class StromaeSession(object):
         print("in __exit__ of %s" % mp.current_process())
 
 
-def initialization_driver(url_stromae: str, is_global: bool = True) -> Firefox:
+def initialization_driver(url_stromae: str, is_global: bool = True, women: bool = False) -> Firefox:
     if is_global:
         global driver
     options = Options()
@@ -61,10 +61,13 @@ def initialization_driver(url_stromae: str, is_global: bool = True) -> Firefox:
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "#next-button > .MuiButton-label"))
     )
-    driver.find_element(By.CSS_SELECTOR, "#input-label-l5smdkey-2 > p").click()
+    if women:
+        driver.find_element(By.CSS_SELECTOR, "#input-label-l5smdkey-1 > p").click()
+    else:
+        driver.find_element(By.CSS_SELECTOR, "#input-label-l5smdkey-2 > p").click()
     driver.find_element(By.CSS_SELECTOR, "#next-button > .MuiButton-label").click()
     WebDriverWait(driver, 10).until(
-        EC.presence_of_element_located((By.ID, "l5smshnt-input"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, ".lunatic-suggester-input"))
     )
     return driver
 
@@ -72,14 +75,14 @@ def initialization_driver(url_stromae: str, is_global: bool = True) -> Firefox:
 def request_suggester_stromae(text_input: str, driver_web: Optional[BaseWebDriver]= None) -> list[str]:
     if driver_web is None:
         driver_web = driver
-    driver_web.find_element(By.ID, "l5smshnt-input").clear()
+    driver_web.find_element(By.CSS_SELECTOR, ".lunatic-suggester-input").clear()
     WebDriverWait(driver_web, 10, 0.1).until_not(
         EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#l5smshnt-list > li"))
     )
-    driver_web.find_element(By.ID, "l5smshnt-input").send_keys(text_input)
+    driver_web.find_element(By.CSS_SELECTOR, ".lunatic-suggester-input").send_keys(text_input)
     try:
         elements = WebDriverWait(driver_web, 1, 0.1).until(
-            EC.presence_of_all_elements_located((By.CSS_SELECTOR, "#l5smshnt-list > li > div > .label"))
+            EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".lunatic-suggester-panel > li > div > .label"))
         )
     except selenium.common.exceptions.TimeoutException:
         elements = []
@@ -90,20 +93,20 @@ def request_suggester_stromae(text_input: str, driver_web: Optional[BaseWebDrive
 def finalizer():
     driver.quit()
 
-def _worker_init(url_stromae: str, is_global: bool = True):
+def _worker_init(url_stromae: str, is_global: bool = True, women: bool = False):
     global resource
-    initialization_driver(url_stromae, is_global)
+    initialization_driver(url_stromae, is_global, women)
     Finalize(None, finalizer, exitpriority=10)
 
 
-def process_data_stromae(data: list[str], url_stromae: str, nb_thread: int = 1, progress: bool = True) -> dict[str, list[str]]:
+def process_data_stromae(data: list[str], url_stromae: str, nb_thread: int = 1, progress: bool = True, women: bool=False) -> dict[str, list[str]]:
     if nb_thread > 1:
-        p = mp.Pool(processes=nb_thread, initializer=_worker_init, initargs=(url_stromae, True))
+        p = mp.Pool(processes=nb_thread, initializer=_worker_init, initargs=(url_stromae, True, women))
         results = p.map(request_suggester_stromae, data)
         p.close()
         p.join()
     else: 
-        driver = initialization_driver(url_stromae, False)
+        driver = initialization_driver(url_stromae, False, women)
         results = [request_suggester_stromae(x, driver) for x in tqdm(data, disable=not(progress))]
         driver.quit()
     return {tinput:res for tinput, res in zip(data,results)}
