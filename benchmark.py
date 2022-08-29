@@ -144,5 +144,5 @@ if __name__ == '__main__':
     print(evaluation["F"])
 
     data_profs = compute_data(data=data, suggestions=suggestions)
-    os.makedirs(Path(data_location).parent)
+    os.makedirs(Path(data_location).parent,exist_ok=True)
     data_profs.to_csv(data_location, index=False, encoding="utf-8")
