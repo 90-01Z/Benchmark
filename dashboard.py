@@ -91,7 +91,7 @@ st.header("Présentation des trois outils")
 
 st.markdown("""
 - [Suggester Lunatic](https://stromae-9001z.kub.sspcloud.fr/questionnaire/90-01Z/unite-enquetee/90-01Z_01) : Outil de codage sur liste dans la nouvelle filière (technologie : Javascript)
-- [Melauto](https://melauto-9001z.kub.sspcloud.fr/profession?saisie=Stat) : Outil de collecte des profession dans l'EEC en autoadministré web (technologie : Java)
+- [Melauto](https://melauto-9001z.kub.sspcloud.fr/profession?saisie=Stat) : Outil de collecte des professions dans l'EEC en autoadministré web (technologie : Java)
 - [CIP](https://cip-9001z.kub.sspcloud.fr) : Outil de consultation de l'index des professions (technologie : elasticsearch)
 """)
 
@@ -99,7 +99,7 @@ st.header("Taux de recouvrement")
 st.markdown("""
 Il s'agit de la part des observations où les suggestions proposées au travers de l'outil, 
 pour le dernier texte qu'avait saisi l'enquêté dans la barre de recherche avant qu'il ne sélectionne un écho dans la liste,
-comprennent celle retenu par l'enquêté lors de la collecte.
+comprenant celle retenue par l'enquêté lors de la collecte.
 """)
 
 genre_recouvrement = st.selectbox("Genre des libellés de profession", ["M","F", "A"], index=2 ,format_func=lambda x: {
@@ -111,9 +111,9 @@ genre_recouvrement = st.selectbox("Genre des libellés de profession", ["M","F",
 st.table(eval_recouvrement(data_prof,genre_recouvrement))
 
 st.markdown("""
-Le taux de recouvrement de l'outil Melauto devrait être de 100 %. L'outil déployé pour le test est identique à celui utilisé lors de la collecte de l'EEC en 2021. De plus, les listes des professions et des mots vides de sens sens sont celles qui ont été intégrées en 2021.
+Le taux de recouvrement de l'outil Melauto devrait être de 100 %. L'outil déployé pour le test est identique à celui utilisé lors de la collecte de l'EEC en 2021. De plus, les listes des professions et des mots vides de sens sont celles qui ont été intégrées en 2021.
 
-*Une piste possible pourrait être une erreur dans les paradonnées de l'EEC. Le libellé collecté en cours de saisi ne serait pas exactement le dernier saisi qui a donné lui a la sélection d'un écho.*
+*Une piste possible pourrait être une erreur dans les paradonnées de l'EEC. Le libellé collecté en cours de saisi ne serait pas exactement le dernier saisi qui a donné lieu à la sélection d'un écho.*
 """)
 
 st.header("Comparaison des rangs des suggestions")
@@ -148,7 +148,7 @@ st.dataframe(data_prof[["type_prof_label","text_input","text_choice","rank_melau
     }),width=None)
 
 st.markdown("""
-Un rang de 0 signifie que la proposition choisie par l'enquêté ne se retrouve pas dans les suggestion de l'outil pour le même input.
+Un rang ayant pour valeur "0" signifie que la proposition choisie par l'enquêté ne se retrouve pas dans les suggestions de l'outil considéré pour le même input (i.e. même texte saisi).
 """)
 
 
