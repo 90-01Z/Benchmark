@@ -134,6 +134,7 @@ if __name__ == '__main__':
     
     suggestions = compute_suggestions(url_dataset, url_stromae, url_cip, url_melauto)
     data = init_dataset(url_dataset)
+    data.insert(loc=0,column="obs_id",value=data.index)
     
     evaluation = eval_recouvrement(
         data=data, 
