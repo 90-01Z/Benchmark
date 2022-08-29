@@ -81,7 +81,7 @@ def request_suggester_stromae(text_input: str, driver_web: Optional[BaseWebDrive
     )
     driver_web.find_element(By.CSS_SELECTOR, ".lunatic-suggester-input").send_keys(text_input)
     try:
-        elements = WebDriverWait(driver_web, 1, 0.1).until(
+        elements = WebDriverWait(driver_web, 5, 0.1).until(
             EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".lunatic-suggester-panel > li > div > .label"))
         )
     except selenium.common.exceptions.TimeoutException:

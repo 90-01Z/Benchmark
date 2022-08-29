@@ -2,3 +2,5 @@ selenium
 tqdm
 pandas
 requests
+streamlit
+plotly
