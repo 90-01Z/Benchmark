@@ -123,7 +123,7 @@ def compute_data(data: pd.DataFrame, suggestions: dict):
     data_prof.rank_stromae = [int(x) for x in data_prof.rank_stromae]
     data_prof.obs_id = [int(x) for x in data_prof.obs_id]
     data_prof = data_prof[["obs_id","type_prof_id","type_prof_label","sex_prof_id","text_input","text_choice","rank_melauto","rank_cip","rank_stromae"]]
-    return data
+    return data_prof
 
 if __name__ == '__main__':
     url_dataset = os.environ["URL_DATASET"] # "https://minio.lab.sspcloud.fr/shz42c/hackathon9001Z/EEC_hackathon.csv"
