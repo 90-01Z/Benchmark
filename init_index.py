@@ -19,6 +19,7 @@ data.to_csv("./index_gen/cip/index_cip.csv",index=False, encoding="utf-8")
 # OUTPUT STROMAE
 stromae_h = data[["id","libm"]].rename(columns={"libm":"label"})
 stromae_h = stromae_h.loc[~stromae_h["label"].isna(),]
+stromae_h["label2"] = stromae_h["label"] 
 stromae_h_dict = stromae_h.to_dict("records")
 for el in stromae_h_dict:
     el["id"] = int(el["id"])
